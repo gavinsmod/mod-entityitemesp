@@ -20,7 +20,7 @@
 package com.peasenet.mods.esp
 
 import com.peasenet.main.Settings
-import com.peasenet.config.TracerConfig
+import com.peasenet.config.EspConfig
 import com.peasenet.settings.SettingBuilder
 import com.peasenet.util.RenderUtils
 import com.peasenet.util.event.data.EntityRender
@@ -64,9 +64,9 @@ class ModEntityItemEsp : EspMod(
         RenderUtils.drawBox(er.stack, er.buffer, box, config.itemColor, config.alpha)
     }
     companion object {
-        private val config: TracerConfig
+        private val config: EspConfig
         get() {
-            return Settings.getConfig<TracerConfig>("tracer")
+            return Settings.getConfig<EspConfig>("esp")
         }
     }
 }
