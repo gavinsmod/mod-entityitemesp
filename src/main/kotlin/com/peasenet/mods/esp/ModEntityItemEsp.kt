@@ -19,6 +19,8 @@
  */
 package com.peasenet.mods.esp
 
+import com.peasenet.main.Settings
+import com.peasenet.config.TracerConfig
 import com.peasenet.settings.SettingBuilder
 import com.peasenet.util.RenderUtils
 import com.peasenet.util.event.data.EntityRender
@@ -38,10 +40,10 @@ class ModEntityItemEsp : EspMod(
     init {
         val colorSetting = SettingBuilder()
             .setTitle("gavinsmod.settings.esp.item.color")
-            .setColor(espConfig.itemColor)
+            .setColor(config.itemColor)
             .buildColorSetting()
 
-        colorSetting.setCallback { espConfig.itemColor = colorSetting.color }
+        colorSetting.setCallback { config.itemColor = colorSetting.color }
         addSetting(colorSetting)
     }
 
@@ -59,6 +61,12 @@ class ModEntityItemEsp : EspMod(
         if (er.entityType !== EntityType.ITEM) return
         if (er.buffer == null) return
         val box = RenderUtils.getEntityBox(er.delta, er.entity)
-        RenderUtils.drawBox(er.stack, er.buffer, box, espConfig.itemColor, espConfig.alpha)
+        RenderUtils.drawBox(er.stack, er.buffer, box, config.itemColor, config.alpha)
+    }
+    companion object {
+        private val config: TracerConfig
+        get() {
+            return Settings.getConfig<TracerConfig>("tracer")
+        }
     }
 }
